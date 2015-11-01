@@ -1,0 +1,31 @@
+{
+    "chmod": "0755",
+    "directories": [
+        "src"
+    ],
+    "finder": [
+        {
+            "name": "*.php",
+            "in": "vendor",
+            "exclude": [
+                "vendor/bin",
+                "vendor/doctrine",
+                "vendor/fabpot",
+                "vendor/justinrainbow",
+                "vendor/phpdocumentor",
+                "vendor/phpseclib",
+                "vendor/phpspec",
+                "vendor/phpunit",
+                "vendor/sebastian",
+                "vendor/seld",
+                "vendor/tedivm",
+                "vendor/twig",
+                "tests"
+            ]
+        }
+    ],
+    "git-version": "package_version",
+    "main": "src/bootstrap.php",
+    "output": "bin/php_backslasher.phar",
+    "stub": true
+}

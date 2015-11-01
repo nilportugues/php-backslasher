@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b7668e2a-42e6-4cb7-8658-92093caf630f" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/BackslashFixer/Fixer/FileEditor.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/BackslashFixer/Fixer/FunctionRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/App/Fixer/FunctionRepositoryTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/BackslashFixer/Fixer/PhpFilesRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/Resources/StringToolsTest.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/phpunit.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/App/Command/ExampleCommand/SubExampleCommand.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tests/bootstrap.php" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/App/Application.php" afterPath="$PROJECT_DIR$/src/BackslashFixer/Application.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/App/Command/ExampleCommand.php" afterPath="$PROJECT_DIR$/src/BackslashFixer/Command/FixCommand.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/App/Command/HelpCommand.php" afterPath="$PROJECT_DIR$/src/BackslashFixer/Command/HelpCommand.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/App/Command/SelfUpdateCommand.php" afterPath="$PROJECT_DIR$/src/BackslashFixer/Command/SelfUpdateCommand.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bootstrap.php" afterPath="$PROJECT_DIR$/src/bootstrap.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/box.json" afterPath="$PROJECT_DIR$/box.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
+    </list>
+    <ignored path="myapp.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="myapp" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="FunctionRepository.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/BackslashFixer/Fixer/FunctionRepository.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="27" column="5" selection-start="682" selection-end="682" vertical-scroll-proportion="0.8982036" vertical-offset="0" max-vertical-offset="690">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Application.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/BackslashFixer/Application.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="39" selection-start="193" selection-end="217" vertical-scroll-proportion="-0.625" vertical-offset="135" max-vertical-offset="930">
+              <folding>
+                <element signature="e#47#86#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FixCommand.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/BackslashFixer/Command/FixCommand.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="5" selection-start="313" selection-end="390" vertical-scroll-proportion="-9.375" vertical-offset="15" max-vertical-offset="930">
+              <folding>
+                <element signature="e#55#104#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HelpCommand.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/corneltek/cliframework/src/CLIFramework/Command/HelpCommand.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="79" column="26" selection-start="2344" selection-end="2344" vertical-scroll-proportion="-2.45283" vertical-offset="890" max-vertical-offset="3495">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Command.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/corneltek/cliframework/src/CLIFramework/Command.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="41" column="30" selection-start="903" selection-end="903" vertical-scroll-proportion="-16.291666" vertical-offset="74" max-vertical-offset="2025">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Application.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/corneltek/cliframework/src/CLIFramework/Application.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="49" column="0" selection-start="1268" selection-end="1268" vertical-scroll-proportion="254.0" vertical-offset="6366" max-vertical-offset="8010">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="composer.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/composer.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="22" selection-start="68" selection-end="68" vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="840">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="box.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/box.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="28" column="29" selection-start="741" selection-end="741" vertical-scroll-proportion="-17.5" vertical-offset="0" max-vertical-offset="540">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/App/Command/ExampleCommand.php" />
+        <option value="$PROJECT_DIR$/src/App/Command/FixCommand/FixCmmand.php" />
+        <option value="$PROJECT_DIR$/tests/Resources/StringTools.php" />
+        <option value="$PROJECT_DIR$/src/App/Fixer/PhpFilesRepository.php" />
+        <option value="$PROJECT_DIR$/vendor/nilportugues/serializer/src/Strategy/JsonStrategy.php" />
+        <option value="$PROJECT_DIR$/nikita.txt" />
+        <option value="$PROJECT_DIR$/vendor/nikic/php-parser/lib/PhpParser/PrettyPrinter/Standard.php" />
+        <option value="$PROJECT_DIR$/src/App/Fixer/PhpParser/FunctionVisitor.php" />
+        <option value="$PROJECT_DIR$/a.php" />
+        <option value="$PROJECT_DIR$/src/App/Fixer/FunctionRepository.php" />
+        <option value="$PROJECT_DIR$/tests/Resources/NamespacedFunctions.php" />
+        <option value="$PROJECT_DIR$/phpunit.xml.dist" />
+        <option value="$PROJECT_DIR$/src/App/Application.php" />
+        <option value="$PROJECT_DIR$/src/App/Fixer/FileEditor.php" />
+        <option value="$PROJECT_DIR$/src/App/Command/FixCommand.php" />
+        <option value="$PROJECT_DIR$/src/BackslashFixer/Command/HelpCommand.php" />
+        <option value="$PROJECT_DIR$/src/BackslashFixer/Command/SelfUpdateCommand.php" />
+        <option value="$PROJECT_DIR$/src/BackslashFixer/Fixer/FileEditor.php" />
+        <option value="$PROJECT_DIR$/tests/Resources/StringToolsTest.php" />
+        <option value="$PROJECT_DIR$/tests/App/Fixer/FunctionRepositoryTest.php" />
+        <option value="$PROJECT_DIR$/src/BackslashFixer/Fixer/FunctionRepository.php" />
+        <option value="$PROJECT_DIR$/src/BackslashFixer/Command/FixCommand.php" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/src/BackslashFixer/Application.php" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/box.json" />
+      </list>
+    </option>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1599" />
+    <option name="y" value="24" />
+    <option name="width" value="1602" />
+    <option name="height" value="853" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="SearchEverywhereHistory" value="PhpParser\Node\Stmt\Namespace_" />
+    <property name="LayoutCode.rearrangeEntries" value="false" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
+    <list size="0" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b7668e2a-42e6-4cb7-8658-92093caf630f" name="Default" comment="" />
+      <created>1446329810358</created>
+      <updated>1446329810358</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1599" y="24" width="1602" height="853" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4377565" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32968536" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32968536" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/SPL.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="255" column="20" selection-start="8756" selection-end="8756" vertical-scroll-proportion="0.4851794" vertical-offset="3514" max-vertical-offset="31020">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/SPL_c1.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="355" column="6" selection-start="11991" selection-end="11991" vertical-scroll-proportion="-1.1419656" vertical-offset="6057" max-vertical-offset="33885">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BackslashFixer/Fixer/PhpFilesRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="0" selection-start="772" selection-end="772" vertical-scroll-proportion="-1.625" vertical-offset="336" max-vertical-offset="690">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/phpunit.xml.dist">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="0" selection-start="957" selection-end="957" vertical-scroll-proportion="0.0" vertical-offset="147" max-vertical-offset="825">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BackslashFixer/Command/SelfUpdateCommand.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="36" selection-start="567" selection-end="567" vertical-scroll-proportion="0.51834863" vertical-offset="36" max-vertical-offset="750">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BackslashFixer/Fixer/FileEditor.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="0" selection-start="419" selection-end="419" vertical-scroll-proportion="-8.125" vertical-offset="0" max-vertical-offset="2055">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/App/Fixer/FunctionRepositoryTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="47" selection-start="340" selection-end="340" vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="600">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bootstrap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="0" selection-start="130" selection-end="130" vertical-scroll-proportion="0.13761468" vertical-offset="0" max-vertical-offset="654">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BackslashFixer/Command/HelpCommand.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="7" selection-start="140" selection-end="140" vertical-scroll-proportion="0.2293578" vertical-offset="0" max-vertical-offset="654">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/corneltek/cliframework/src/CLIFramework/CommandBase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="97" column="7" selection-start="2423" selection-end="2423" vertical-scroll-proportion="-0.5030581" vertical-offset="1304" max-vertical-offset="13440">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/corneltek/cliframework/src/CLIFramework/Command/HelpCommand.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="79" column="26" selection-start="2344" selection-end="2344" vertical-scroll-proportion="-2.45283" vertical-offset="890" max-vertical-offset="3495">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/corneltek/cliframework/src/CLIFramework/Command.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="30" selection-start="903" selection-end="903" vertical-scroll-proportion="-16.291666" vertical-offset="74" max-vertical-offset="2025">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/corneltek/cliframework/src/CLIFramework/Application.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="0" selection-start="1268" selection-end="1268" vertical-scroll-proportion="254.0" vertical-offset="6366" max-vertical-offset="8010">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="45" selection-end="45" vertical-scroll-proportion="0.16759777" vertical-offset="0" max-vertical-offset="358">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BackslashFixer/Command/FixCommand.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="5" selection-start="313" selection-end="390" vertical-scroll-proportion="-9.375" vertical-offset="15" max-vertical-offset="930">
+          <folding>
+            <element signature="e#55#104#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="22" selection-start="68" selection-end="68" vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="840">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BackslashFixer/Application.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="39" selection-start="193" selection-end="217" vertical-scroll-proportion="-0.625" vertical-offset="135" max-vertical-offset="930">
+          <folding>
+            <element signature="e#47#86#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="2" selection-start="121" selection-end="121" vertical-scroll-proportion="0.092307694" vertical-offset="0" max-vertical-offset="650">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/box.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="29" selection-start="741" selection-end="741" vertical-scroll-proportion="-17.5" vertical-offset="0" max-vertical-offset="540">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/Resources/StringToolsTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="5" selection-start="420" selection-end="420" vertical-scroll-proportion="0.1017964" vertical-offset="251" max-vertical-offset="585">
+          <folding>
+            <element signature="e#6#238#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BackslashFixer/Fixer/FunctionRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="5" selection-start="682" selection-end="682" vertical-scroll-proportion="0.8982036" vertical-offset="0" max-vertical-offset="690">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
+
