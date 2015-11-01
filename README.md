@@ -4,14 +4,14 @@
 
 # PHP Function BackSlasher
 
-PHAR tool to add all PHP internal functions to its namespace by adding backslash to them.
+Tool to add all PHP internal functions to its namespace by adding backslash to them.
 
 ## Installation
 
 ### As a dependency using Composer
 Use [Composer](https://getcomposer.org) to install the package:
 
-```json
+```
 $ composer require nilportugues/php_backslasher
 ```
 
@@ -32,7 +32,14 @@ $ cp build/php_backslasher.phar /usr/local/bin/php_backslasher
 ```
 
 
-### Build PHAR:
+## Usage
+
+```
+$ php bin/php_backslasher fix <path/to/directory>
+```
+
+
+## Custom PHAR:
 
 While the PHAR file is included under `bin/php_backslasher`, but can be built using the following command:
 
