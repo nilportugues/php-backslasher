@@ -2,7 +2,11 @@
     "name": "nilportugues/php_backslasher",
     "type": "library",
     "description": "Adds all PHP internal functions to its namespace by adding backslash to them. Improves the application's performance when OPCache is on.",
-    "keywords": ["php", "fixer", "namespace", "namespaces", "backflash", "nikita", "function", "opcache", "micro-optimization", "optimization", "performance"],
+    "keywords": [
+        "php", "fixer", "namespace", "namespaces",
+        "backflash", "nikita", "function", "opcache",
+        "micro-optimization", "optimization", "performance"
+    ],
     "homepage": "http://nilportugues.com",
     "license": "MIT",
     "authors": [
@@ -45,6 +49,9 @@
         "bin-dir": "bin/"
     },
     "scripts": {
-        "build": "./vendor/bin/box build && mv bin/app.phar bin/app"
-    }
+        "build": "php -d phar.readonly=false box.phar build && mv bin/php_backslasher.phar bin/php_backslasher"
+    },
+    "bin": [
+        "php_backslasher"
+    ]
 }
