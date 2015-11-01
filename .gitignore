@@ -1,5 +1,4 @@
 /vendor
 /composer.lock
 /build_test
-.*/
-clean-build.sh
+.php_cs.cache
