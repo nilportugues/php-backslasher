@@ -10,8 +10,14 @@ PHAR tool to add all PHP internal functions to its namespace by adding backslash
 
 Use [Composer](https://getcomposer.org) to install the package:
 
-```json
+```
 $ composer require nilportugues/php_backslasher
+```
+
+## Usage
+
+```
+$ php bin/php_backslasher fix <path/to/directory>
 ```
 
 
