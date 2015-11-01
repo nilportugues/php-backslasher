@@ -1,4 +1,6 @@
 /vendor
 /composer.lock
 /build
+/bin
+.*/
 clean-build.sh
