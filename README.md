@@ -8,10 +8,27 @@ PHAR tool to add all PHP internal functions to its namespace by adding backslash
 
 ## Installation
 
+### As a dependency using Composer
 Use [Composer](https://getcomposer.org) to install the package:
 
 ```json
 $ composer require nilportugues/php_backslasher
+```
+
+### As a PHAR file
+
+You can also use already last built `.phar`.
+
+``` bash
+$ git clone git@github.com:nilportugues/php_backslasher.git
+$ cd php_backslasher
+$ php build/php_backslasher.phar
+```
+
+You can copy the `.phar` file as a global script
+
+``` bash
+$ cp build/php_backslasher.phar /usr/local/bin/php_backslasher
 ```
 
 
@@ -26,7 +43,5 @@ $ php -d phar.readonly=false box.phar build
 You may also like to make it runnable by just giving it permissions to be used as an executable file and hide its extension.
 
 ```
-$ chmod 755 bin/php_backslasher.phar
-
-$ mv bin/php_backslasher.phar bin/php_backslasher
+$ chmod 755 bin/php_backslasher.phar && mv bin/php_backslasher.phar bin/php_backslasher
 ```
