@@ -22,7 +22,7 @@ class Application extends CliApp
      */
     public function options($opts)
     {
-        // parent::options($opts);
+
     }
 
     /**

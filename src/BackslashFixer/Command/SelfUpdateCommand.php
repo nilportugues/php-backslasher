@@ -23,7 +23,7 @@ class SelfUpdateCommand extends Command
      */
     public function execute()
     {
-        global $argv;
+        $argv = func_get_args();
         $script = realpath($argv[0]);
 
         if (!is_writable($script)) {
