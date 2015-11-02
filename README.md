@@ -6,6 +6,8 @@
 
 Tool to add all PHP internal functions to its namespace by adding backslash to them.
 
+Function resolution without the backslash forces the PHP internals to verify for each function call if function belongs to current namespace or the global namespace. With the backslashed functions PHP does not check the current namespace and therefore execution is faster.
+
 ## Installation
 
 ### As a dependency using Composer
