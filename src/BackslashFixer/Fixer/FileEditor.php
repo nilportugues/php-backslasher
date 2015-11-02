@@ -17,7 +17,7 @@ class FileEditor
     /**
      * @var array
      */
-    private static $characters = [" ", "(", ","];
+    private static $characters = [" ", "(", ",", "!", "[", "="];
 
     /**
      *
