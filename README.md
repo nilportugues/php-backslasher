@@ -10,54 +10,30 @@ Function resolution without the backslash forces the PHP internals to verify for
 **Idea from Nikita Popov talk**: 
 - [PHP 7 – What changed internally? (PHP Barcelona 2015)](http://www.slideshare.net/nikita_ppv/php-7-what-changed-internally-php-barcelona-2015) (slide [72](http://image.slidesharecdn.com/php7internals-151101105627-lva1-app6891/95/php-7-what-changed-internally-php-barcelona-2015-72-638.jpg?cb=1446375542))
 
-## Usage
-
-```
-$ php bin/php_backslasher fix <path/to/directory>
-```
-
-
 ## Installation
 
-### As a dependency using Composer
 Use [Composer](https://getcomposer.org) to install the package:
 
 ```
 $ composer require nilportugues/php_backslasher
 ```
 
-### As a PHAR file
-
-You can also use already last built `.phar`.
-
-``` bash
-$ git clone git@github.com:nilportugues/php_backslasher.git
-$ cd php_backslasher
-$ php build/php_backslasher.phar
-```
-
-You can copy the `.phar` file as a global script
-
-``` bash
-$ cp build/php_backslasher.phar /usr/local/bin/php_backslasher
-```
-
-
-## Building the PHAR:
-
-While the PHAR file is included under `bin/php_backslasher`, but can be built using the following command:
+## Usage
 
 ```
-$ php -d phar.readonly=false bin/compile
+$ php bin/php_backslasher fix <path/to/directory>
 ```
 
-You may also like to make it runnable by just giving it permissions to be used as an executable file and hide its extension.
+###Output
 
-```
-$ chmod 755 bin/php_backslasher.phar 
-$ mv bin/php_backslasher.phar bin/php_backslasher
-```
+Works for function in conditional statements, negative conditionals, placed in an array as key or value and any other normal use.
 
+```php
+echo strlen('Hello World');
+
+// becomes:
+echo \strlen('Hello World');
+```
 
 
 ## Contribute
