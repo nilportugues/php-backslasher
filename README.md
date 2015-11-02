@@ -7,6 +7,13 @@ Tool to add all PHP internal functions to its namespace by adding backslash to t
 
 Function resolution without the backslash forces the PHP internals to verify for each function call if function belongs to current namespace or the global namespace. With the backslashed functions PHP does not check the current namespace and therefore execution is faster.
 
+## Usage
+
+```
+$ php bin/php_backslasher fix <path/to/directory>
+```
+
+
 ## Installation
 
 ### As a dependency using Composer
@@ -33,14 +40,7 @@ $ cp build/php_backslasher.phar /usr/local/bin/php_backslasher
 ```
 
 
-## Usage
-
-```
-$ php bin/php_backslasher fix <path/to/directory>
-```
-
-
-## Custom PHAR:
+## Building the PHAR:
 
 While the PHAR file is included under `bin/php_backslasher`, but can be built using the following command:
 
@@ -51,5 +51,6 @@ $ php -d phar.readonly=false box.phar build
 You may also like to make it runnable by just giving it permissions to be used as an executable file and hide its extension.
 
 ```
-$ chmod 755 bin/php_backslasher.phar && mv bin/php_backslasher.phar bin/php_backslasher
+$ chmod 755 bin/php_backslasher.phar 
+$ mv bin/php_backslasher.phar bin/php_backslasher
 ```
