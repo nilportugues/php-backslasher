@@ -29,7 +29,8 @@
     "require": {
         "php": ">=5.4.0",
         "corneltek/cliframework": "~2.8",
-        "zendframework/zend-code": "~2"
+        "zendframework/zend-code": "~2",
+        "pimple/pimple": "1.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.0",
