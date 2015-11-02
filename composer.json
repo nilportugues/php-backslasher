@@ -16,16 +16,6 @@
             "role": "Project Lead Developer"
         }
     ],
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/nilportugues-php-tools/zend-code.git"
-        },
-        {
-            "type": "git",
-            "url": "https://github.com/nilportugues-php-tools/CLIFramework.git"
-        }
-    ],
     "require": {
         "php": ">=5.4.0",
         "corneltek/cliframework": "~2.8",
