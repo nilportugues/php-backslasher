@@ -29,6 +29,9 @@ class Compiler
      */
     protected $versionDate;
 
+
+    protected $files = [];
+
     /**
      * Compiles composer into a single phar file
      *
@@ -49,16 +52,18 @@ class Compiler
          */
         $phar = new Phar($pharFilePath, 0, 'php_backslasher.phar');
         $phar->setSignatureAlgorithm(\Phar::SHA1);
-
         $phar->startBuffering();
 
-        $this
-            ->addPHPFiles($phar)
-            ->addVendorFiles($phar)
-            ->addComposerVendorFiles($phar)
-            ->addBin($phar)
-            ->addStub($phar)
-            ->addLicense($phar);
+        $this->addPHPFiles($phar);
+        $this->addVendorFiles($phar);
+        $this->addAutoload($phar);
+        $this->addBin($phar);
+        $this->addStub($phar);
+
+
+        foreach ($this->files as $file) {
+            $this->addFile($phar, $file);
+        }
 
         $phar->stopBuffering();
 
@@ -66,33 +71,106 @@ class Compiler
     }
 
     /**
-     * Add a file into the phar package
-     *
-     * @param Phar        $phar  Phar object
-     * @param SplFileInfo $file  File to add
-     * @param bool        $strip strip
+     * Load versions
+     */
+    private function loadVersion()
+    {
+        $process = new Process('git log --pretty="%H" -n1 HEAD', __DIR__);
+        if ($process->run() != 0) {
+            throw new \RuntimeException('Can\'t run git log. You must ensure to run compile from php_backslasher git repository clone and that git binary is available.');
+        }
+        $this->version = \trim($process->getOutput());
+
+        $process = new Process('git log -n1 --pretty=%ci HEAD', __DIR__);
+        if ($process->run() != 0) {
+            throw new \RuntimeException('Can\'t run git log. You must ensure to run compile from php_backslasher git repository clone and that git binary is available.');
+        }
+        $date = new \DateTime(\trim($process->getOutput()));
+        $date->setTimezone(new \DateTimeZone('UTC'));
+        $this->versionDate = $date->format('Y-m-d H:i:s');
+
+        $process = new Process('git describe --tags HEAD');
+        if ($process->run() == 0) {
+            $this->version = \trim($process->getOutput());
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add php files
      *
      * @return Compiler self Object
      */
-    protected function addFile(
-        Phar $phar,
-        SplFileInfo $file,
-        $strip = true
-    ) {
-        $path = \strtr(\str_replace(\dirname(dirname(\dirname(__DIR__))) . DIRECTORY_SEPARATOR, '', $file->getRealPath()), '\\', '/');
-        $content = \file_get_contents($file);
-        if ($strip) {
-            $content = $this->stripWhitespace($content);
-        } elseif ('LICENSE' === \basename($file)) {
-            $content = "\n" . $content . "\n";
+    private function addPHPFiles()
+    {
+        /**
+         * All *.php files
+         */
+        $finder = new Finder();
+        $finder
+            ->files()
+            ->ignoreVCS(true)
+            ->name('*.php')
+            ->notName('Compiler.php')
+            ->notName('ClassLoader.php')
+            ->in(\realpath(__DIR__ . '/../../../src'));
+
+        /** @var SplFileInfo $file */
+        foreach ($finder as $file) {
+            $this->files[$file->getPathname()] = $file;
         }
 
-        if ($path === 'src/Composer/Composer.php') {
-            $content = \str_replace('@package_version@', $this->version, $content);
-            $content = \str_replace('@release_date@', $this->versionDate, $content);
+        return $this;
+    }
+
+    /**
+     * Add vendor files
+     *
+     * @param Phar $phar Phar instance
+     *
+     * @return Compiler self Object
+     */
+    private function addVendorFiles(Phar $phar)
+    {
+        $vendorPath = __DIR__ . '/../../../vendor/';
+
+        /**
+         * All *.php files
+         */
+        $finder = new Finder();
+        $finder
+            ->files()
+            ->ignoreVCS(true)
+            ->name('*.php')
+            ->exclude('Tests')
+            ->in(
+                [
+                    \realpath($vendorPath . 'symfony/'),
+                    \realpath($vendorPath . 'zendframework/'),
+                    \realpath($vendorPath . 'composer/'),
+                ]
+            );
+
+        /** @var SplFileInfo $file */
+        foreach ($finder as $file) {
+            $this->files[$file->getPathname()] = $file;
         }
 
-        $phar->addFromString($path, $content);
+        return $this;
+    }
+
+    /**
+     * Add composer vendor files
+     *
+     * @return Compiler self Object
+     */
+    private function addAutoload()
+    {
+        $vendorPath = __DIR__ . '/../../../vendor/';
+
+        $file                              = new SplFileInfo($vendorPath . 'autoload.php');
+        $this->files[$file->getPathname()] = $file;
 
         return $this;
     }
@@ -109,6 +187,67 @@ class Compiler
         $content = \file_get_contents(__DIR__ . '/../../../bin/php_backslasher');
         $content = \preg_replace('{^#!/usr/bin/env php\s*}', '', $content);
         $phar->addFromString('bin/php_backslasher', $content);
+
+        return $this;
+    }
+
+    protected function addStub(Phar $phar)
+    {
+        $stub = <<<'EOF'
+#!/usr/bin/env php
+<?php
+/**
+ * Author: Nil Portugués Calderó <contact@nilportugues.com>
+ * Date: 11/1/15
+ * Time: 12:30 AM
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+Phar::mapPhar('php_backslasher.phar');
+
+require_once 'phar://php_backslasher.phar/bin/php_backslasher';
+
+__HALT_COMPILER();
+EOF;
+        $phar->setStub($stub);
+
+        return $this;
+    }
+
+    /**
+     * Add a file into the phar package
+     *
+     * @param Phar        $phar  Phar object
+     * @param SplFileInfo $file  File to add
+     * @param bool        $strip strip
+     *
+     * @return Compiler self Object
+     */
+    protected function addFile(
+        Phar $phar,
+        SplFileInfo $file,
+        $strip = true
+    ) {
+        $path    = \strtr(
+            \str_replace(\dirname(dirname(\dirname(__DIR__))) . DIRECTORY_SEPARATOR, '', $file->getRealPath()),
+            '\\',
+            '/'
+        );
+        $content = \file_get_contents($file);
+        if ($strip) {
+            $content = $this->stripWhitespace($content);
+        } elseif ('LICENSE' === \basename($file)) {
+            $content = "\n" . $content . "\n";
+        }
+
+        if ($path === 'src/Composer/Composer.php') {
+            $content = \str_replace('@package_version@', $this->version, $content);
+            $content = \str_replace('@release_date@', $this->versionDate, $content);
+        }
+
+        $phar->addFromString($path, $content);
 
         return $this;
     }
@@ -146,157 +285,5 @@ class Compiler
         }
 
         return $output;
-    }
-
-    protected function addStub(Phar $phar)
-    {
-        $stub = <<<'EOF'
-#!/usr/bin/env php
-<?php
-/**
- * Author: Nil Portugués Calderó <contact@nilportugues.com>
- * Date: 11/1/15
- * Time: 12:30 AM
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-Phar::mapPhar('php_backslasher.phar');
-
-require 'phar://php_backslasher.phar/bin/php_backslasher';
-
-__HALT_COMPILER();
-EOF;
-        $phar->setStub($stub);
-
-        return $this;
-    }
-
-    /**
-     * Add php files
-     *
-     * @param Phar $phar Phar instance
-     *
-     * @return Compiler self Object
-     */
-    private function addPHPFiles(Phar $phar)
-    {
-        /**
-         * All *.php files
-         */
-        $finder = new Finder();
-        $finder
-            ->files()
-            ->ignoreVCS(true)
-            ->name('*.php')
-            ->notName('Compiler.php')
-            ->notName('ClassLoader.php')
-            ->in(\realpath(__DIR__ . '/../../../src'));
-
-        foreach ($finder as $file) {
-            $this->addFile($phar, $file);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Add vendor files
-     *
-     * @param Phar $phar Phar instance
-     *
-     * @return Compiler self Object
-     */
-    private function addVendorFiles(Phar $phar)
-    {
-        $vendorPath = __DIR__ . '/../../../vendor/';
-
-        /**
-         * All *.php files
-         */
-        $finder = new Finder();
-        $finder
-            ->files()
-            ->ignoreVCS(true)
-            ->name('*.php')
-            ->exclude('Tests')
-            ->in(\realpath($vendorPath . 'symfony/'));
-
-        foreach ($finder as $file) {
-            $this->addFile($phar, $file);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Add composer vendor files
-     *
-     * @param Phar $phar Phar
-     *
-     * @return Compiler self Object
-     */
-    private function addComposerVendorFiles(Phar $phar)
-    {
-        $vendorPath = __DIR__ . '/../../../vendor/';
-
-        /**
-         * Adding composer vendor files
-         */
-        $this
-            ->addFile($phar, new \SplFileInfo($vendorPath . 'autoload.php'))
-            ->addFile($phar, new \SplFileInfo($vendorPath . 'composer/autoload_namespaces.php'))
-            ->addFile($phar, new \SplFileInfo($vendorPath . 'composer/autoload_psr4.php'))
-            ->addFile($phar, new \SplFileInfo($vendorPath . 'composer/autoload_classmap.php'))
-            ->addFile($phar, new \SplFileInfo($vendorPath . 'composer/autoload_real.php'))
-            ->addFile($phar, new \SplFileInfo($vendorPath . 'composer/ClassLoader.php'));
-
-        if (\file_exists($vendorPath . 'composer/include_paths.php')) {
-            $this->addFile($phar, new \SplFileInfo($vendorPath . 'composer/include_paths.php'));
-        }
-
-        return $this;
-    }
-
-    /**
-     * Add license
-     *
-     * @param Phar $phar Phar
-     *
-     * @return Compiler self Object
-     */
-    private function addLicense(Phar $phar)
-    {
-        $this->addFile($phar, new \SplFileInfo(__DIR__ . '/../../../LICENSE'), false);
-
-        return $this;
-    }
-
-    /**
-     * Load versions
-     */
-    private function loadVersion()
-    {
-        $process = new Process('git log --pretty="%H" -n1 HEAD', __DIR__);
-        if ($process->run() != 0) {
-            throw new \RuntimeException('Can\'t run git log. You must ensure to run compile from php_backslasher git repository clone and that git binary is available.');
-        }
-        $this->version = \trim($process->getOutput());
-
-        $process = new Process('git log -n1 --pretty=%ci HEAD', __DIR__);
-        if ($process->run() != 0) {
-            throw new \RuntimeException('Can\'t run git log. You must ensure to run compile from php_backslasher git repository clone and that git binary is available.');
-        }
-        $date = new \DateTime(\trim($process->getOutput()));
-        $date->setTimezone(new \DateTimeZone('UTC'));
-        $this->versionDate = $date->format('Y-m-d H:i:s');
-
-        $process = new Process('git describe --tags HEAD');
-        if ($process->run() == 0) {
-            $this->version = \trim($process->getOutput());
-        }
-
-        return $this;
     }
 }

@@ -4,13 +4,9 @@
 namespace NilPortugues\BackslashFixer\Console;
 
 use NilPortugues\BackslashFixer\Command\FixerCommand;
-use Symfony\Component\Console\Application as BaseApplication;
 
 
-/**
- * Class Application
- */
-class Application extends BaseApplication
+class Application extends \Symfony\Component\Console\Application
 {
     /**
      * Construct method
@@ -22,6 +18,8 @@ class Application extends BaseApplication
 
     /**
      * Initializes all the composer commands
+     *
+     * @return \Symfony\Component\Console\Command\Command[]
      */
     protected function getDefaultCommands()
     {

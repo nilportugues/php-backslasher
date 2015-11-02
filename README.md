@@ -48,7 +48,7 @@ $ cp build/php_backslasher.phar /usr/local/bin/php_backslasher
 While the PHAR file is included under `bin/php_backslasher`, but can be built using the following command:
 
 ```
-$ php -d phar.readonly=false box.phar build
+$ php -d phar.readonly=false bin/compile
 ```
 
 You may also like to make it runnable by just giving it permissions to be used as an executable file and hide its extension.
