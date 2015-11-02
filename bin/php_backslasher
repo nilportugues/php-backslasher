@@ -1,12 +1,26 @@
 #!/usr/bin/env php
 <?php
+
 /**
- * Author: Nil Portugués Calderó <contact@nilportugues.com>
- * Date: 11/2/15
- * Time: 12:13 AM
+ * This file is part of the php_backslasher package
+ *
+ * Copyright (c) 2014 Marc Morera
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * Feel free to edit as you please, and have fun.
+ *
+ * @author Marc Morera <yuhu@mmoreram.com>
  */
 
-include __DIR__ . '/../src/bootstrap.php';
+require __DIR__ . '/../src/bootstrap.php';
+
+use NilPortugues\BackslashFixer\Console\Application;
+
+error_reporting(-1);
+ini_set('display_errors', 1);
+
+// run the command application
+$application = new Application();
+$application->run();

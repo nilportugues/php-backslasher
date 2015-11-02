@@ -1,27 +1,15 @@
-#!/usr/bin/env php
 <?php
 
-foreach (array( __DIR__ . '/../vendor/autoload.php', __DIR__ . '/vendor/autoload.php', __DIR__ . '/../../../autoload.php',) as $file) {
-    if (file_exists($file)) {
-        define('COMPOSER_INSTALL', $file);
-
-        break;
-    }
+function includeIfExists($file)
+{
+    return \file_exists($file) ? include_once $file : false;
 }
 
-unset($file);
-
-if (!defined('COMPOSER_INSTALL')) {
-    fwrite(STDERR,
-        'You need to set up the project dependencies using the following commands:' . PHP_EOL .
-        'wget http://getcomposer.org/composer.phar' . PHP_EOL .
-        'php composer.phar install' . PHP_EOL
-    );
-
-    die(1);
+if ((!$loader = includeIfExists(__DIR__ . '/../vendor/autoload.php')) && (!$loader = includeIfExists(__DIR__ . '/../../../autoload.php'))) {
+    echo 'You must set up the project dependencies, run the following commands:' . PHP_EOL .
+        'curl -sS https://getcomposer.org/installer | php' . PHP_EOL .
+        'php composer.phar install' . PHP_EOL;
+    exit(1);
 }
 
-require COMPOSER_INSTALL;
-
-$app = new NilPortugues\BackslashFixer\Application;
-$app->runWithTry($argv);
+return $loader;

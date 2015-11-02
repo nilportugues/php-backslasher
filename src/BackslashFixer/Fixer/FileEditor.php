@@ -12,12 +12,13 @@ namespace NilPortugues\BackslashFixer\Fixer;
 
 use Zend\Code\Generator\FileGenerator;
 
-/**
- * Class FileEditor
- * @package NilPortugues\BackslashFixer\Fixer
- */
 class FileEditor
 {
+    /**
+     * @var array
+     */
+    private static $characters = [" ", "(", ","];
+
     /**
      *
      */
@@ -29,19 +30,21 @@ class FileEditor
 
     /**
      * @param $path
+     * @return float
      */
     public function addBackslashesToFunctions($path)
     {
         $generator = $this->generator->fromReflectedFileName($path);
+        $source = $generator->getSourceContent();
 
+        foreach(self::$characters as $character) {
+            $functions = $this->buildFunctions($character);
+            $functions = $this->removeFunctionsExistingInCurrentNamespaceFromBackslashing($generator, $functions);
+            $functions = $this->removeUseFunctionsFromBackslashing($generator, $functions);
+            $source = \str_replace($functions, $this->buildBackslashedFunctions($character), $source);
+        }
 
-        $functions = $this->buildFunctions();
-        $functions = $this->removeFunctionsExistingInCurrentNamespaceFromBackslashing($generator, $functions);
-        $functions = $this->removeUseFunctionsFromBackslashing($generator, $functions);
-
-
-        $source = \str_replace($functions, $this->buildBackslashedFunctions(), $generator->getSourceContent());
-        $source = \str_replace('function \\', "function ", $source);
+        $source = \str_replace("function \\", "function ", $source);
 
         \file_put_contents($path, $source);
     }
@@ -106,27 +109,29 @@ class FileEditor
 
 
     /**
+     * @param string $previousCharacter
      * @return array
      */
-    protected function buildBackslashedFunctions()
+    private function buildBackslashedFunctions($previousCharacter = ' ')
     {
         $backSlashedFunctions = $this->functions->getFunctions();
 
-        $callback             = function ($v) {
-            return ' \\' . \ltrim($v, "\\")."(";
+        $callback             = function ($v) use ($previousCharacter) {
+            return $previousCharacter.'\\' . \ltrim($v, "\\")."(";
         };
 
         return \array_map($callback, $backSlashedFunctions);
     }
 
     /**
+     * @param string $previousCharacter
      * @return array
      */
-    protected function buildFunctions()
+    private function buildFunctions($previousCharacter = ' ')
     {
         $functions = $this->functions->getFunctions();
-        $callback  = function ($v) {
-            return ' ' . $v . "(";
+        $callback  = function ($v) use ($previousCharacter) {
+            return $previousCharacter . $v . "(";
         };
         $functions = \array_map($callback, $functions);
         return $functions;

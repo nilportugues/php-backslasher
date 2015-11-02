@@ -14,14 +14,6 @@ use NilPortugues\BackslashFixer\Fixer\FunctionRepository;
 
 class FunctionRepositoryTest extends \PHPUnit_Framework_TestCase
 {
-    public function testItReturnsInternalFunctions()
-    {
-        $repository = new FunctionRepository();
-
-        $this->assertTrue($repository->isInternal('strlen'));
-    }
-
-
     public function testItReturnsFunctionsWithKeyValueWithSameValue()
     {
         $repository = new FunctionRepository();

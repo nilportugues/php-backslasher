@@ -23,18 +23,8 @@ class FunctionRepository
      */
     public function __construct()
     {
-        self::$functions = array_map('strtolower', get_defined_functions()['internal']);
-        self::$functions = array_combine(array_values(self::$functions), self::$functions);
-    }
-
-    /**
-     * @param $function
-     *
-     * @return bool
-     */
-    public function isInternal($function)
-    {
-        return in_array(strtolower($function), self::$functions);
+        self::$functions = \array_map('strtolower', \get_defined_functions()['internal']);
+        self::$functions = \array_combine(\array_values(self::$functions), self::$functions);
     }
 
     /**

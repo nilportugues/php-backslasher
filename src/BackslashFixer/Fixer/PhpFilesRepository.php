@@ -14,15 +14,11 @@ use InvalidArgumentException;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
-/**
- * Class PhpFilesRepository
- * @package NilPortugues\BackslashFixer\Fixer
- */
 class PhpFilesRepository
 {
     public function find($path)
     {
-        if (false === is_dir($path) && false === is_file($path)) {
+        if (false === \is_dir($path) && false === \is_file($path)) {
             throw new InvalidArgumentException("Provided input is not a file nor a valid directory");
         }
 
@@ -37,7 +33,7 @@ class PhpFilesRepository
                 continue;
             }
 
-            if ("php" === strtolower($filename->getExtension())) {
+            if ("php" === \strtolower($filename->getExtension())) {
                 $files[] = $filename->getRealPath();
             }
         }
