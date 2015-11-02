@@ -5,7 +5,10 @@
 
 Tool to add all PHP internal functions to its namespace by adding backslash to them.
 
-Function resolution without the backslash forces the PHP internals to verify for each function call if function belongs to current namespace or the global namespace. With the backslashed functions PHP does not check the current namespace and therefore execution is faster.
+Function resolution without the backslash forces the PHP internals to verify for each function call if function belongs to current namespace or the global namespace. With the backslashed functions PHP does not check the current namespace and therefore execution is faster when using OP Cache.
+
+**Idea from Nikita Popov talk**: 
+- [PHP 7 – What changed internally? (PHP Barcelona 2015)](http://www.slideshare.net/nikita_ppv/php-7-what-changed-internally-php-barcelona-2015) (slide [72](http://image.slidesharecdn.com/php7internals-151101105627-lva1-app6891/95/php-7-what-changed-internally-php-barcelona-2015-72-638.jpg?cb=1446375542))
 
 ## Usage
 
