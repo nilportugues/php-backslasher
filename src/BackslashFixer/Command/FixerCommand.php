@@ -41,7 +41,7 @@ class FixerCommand extends Command
      * @param InputInterface  $input  Input
      * @param OutputInterface $output Output
      *
-     * @return int|null|void
+     * @return int|\null|void
      *
      * @throws Exception
      */
@@ -58,7 +58,7 @@ class FixerCommand extends Command
             $fileEditor->addBackslashesToFunctions($file);
         }
 
-        $output->write('Success!', true);
+        $output->write('Success!', \true);
 
         return $output;
     }

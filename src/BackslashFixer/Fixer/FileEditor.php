@@ -20,6 +20,11 @@ class FileEditor
     private static $characters = [" ", "(", ",", "!", "[", "="];
 
     /**
+     * @var array
+     */
+    private static $constants = [];
+
+    /**
      *
      */
     public function __construct()
@@ -44,6 +49,8 @@ class FileEditor
             $source = \str_replace($functions, $this->buildBackslashedFunctions($character), $source);
         }
 
+        $source = \str_replace($this->getDefinedConstants(), $this->replaceConstants(), $source);
+        $source = \str_replace(['true', 'false', 'null'], ['\true', '\false', '\null'], $source);
         $source = \str_replace("function \\", "function ", $source);
 
         \file_put_contents($path, $source);
@@ -135,5 +142,28 @@ class FileEditor
         };
         $functions = \array_map($callback, $functions);
         return $functions;
+    }
+
+    /**
+     * @return array
+     */
+    private function replaceConstants()
+    {
+        $constants = $this->getDefinedConstants();
+        $callback  = function ($v) {
+            return sprintf('\%s', $v);
+        };
+        return \array_map($callback, $constants);
+    }
+
+    /**
+     * @return array
+     */
+    private function getDefinedConstants()
+    {
+        if(empty(self::$constants)) {
+            self::$constants = \array_keys(\get_defined_constants(\false));
+        }
+        return self::$constants;
     }
 }

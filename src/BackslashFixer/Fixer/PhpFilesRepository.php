@@ -18,7 +18,7 @@ class PhpFilesRepository
 {
     public function find($path)
     {
-        if (false === \is_dir($path) && false === \is_file($path)) {
+        if (\false === \is_dir($path) && \false === \is_file($path)) {
             throw new InvalidArgumentException("Provided input is not a file nor a valid directory");
         }
 
