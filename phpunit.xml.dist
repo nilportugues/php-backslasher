@@ -39,6 +39,7 @@
                 <directory>./src/bootstrap.php</directory>
                 <directory>./src/BackslashFixer/Console</directory>
                 <directory>./src/BackslashFixer/Command</directory>
+                <directory>./src/BackslashFixer/Fixer/FileSystem.php</directory>
             </exclude>
         </whitelist>
     </filter>

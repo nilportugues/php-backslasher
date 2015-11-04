@@ -24,6 +24,7 @@ class FunctionRepository
     {
         self::$functions = \array_map('strtolower', \get_defined_functions()['internal']);
         self::$functions = \array_combine(\array_values(self::$functions), self::$functions);
+        ksort(self::$functions, SORT_REGULAR);
     }
 
     /**

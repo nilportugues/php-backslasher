@@ -18,6 +18,8 @@ class InMemoryFileSystem implements FileSystem
         "Resources/Function.php",
         "Resources/Constant.php",
         "Resources/BooleanAndNull.php",
+        "Resources/StringClass.php",
+        "Resources/AliasedFunction.php",
     ];
 
     private $base;

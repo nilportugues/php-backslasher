@@ -55,7 +55,6 @@ class FileEditor
 
         foreach (self::$characters as $character) {
             $functions = $this->buildFunctions($character);
-            $functions = $this->removeFunctionsExistingInCurrentNamespaceFromBackslashing($generator, $functions);
             $functions = $this->removeUseFunctionsFromBackslashing($generator, $functions);
             $source = \str_replace($functions, $this->buildBackslashedFunctions($character), $source);
         }
@@ -68,31 +67,6 @@ class FileEditor
         $this->fileSystem->writeFile($path, $source);
     }
 
-    /**
-     * If a method exists under the current namespace, delete from list and don't replace.
-     *
-     * @param FileGenerator $generator
-     * @param array         $functions
-     *
-     * @return array
-     */
-    private function removeFunctionsExistingInCurrentNamespaceFromBackslashing(
-        FileGenerator $generator,
-        array $functions
-    ) {
-        $namespace = $generator->getNamespace();
-        if (\strlen($namespace)>0) {
-            foreach (\array_keys($functions) as $function) {
-                $functionName = \sprintf("\\%s\\%s", \ltrim($namespace, "\\"), $function);
-
-                if (\function_exists($functionName)) {
-                    unset($functions[$function]);
-                }
-            }
-        }
-
-        return $functions;
-    }
 
     /**
      * If a method exists under a namespace and has been aliased, or has been imported, don't replace.
@@ -105,7 +79,7 @@ class FileEditor
     private function removeUseFunctionsFromBackslashing(FileGenerator $generator, array $functions)
     {
         foreach ($generator->getUses() as $namespacedFunction) {
-            list($functionOrClass, $alias) = $namespacedFunction;
+            list($functionOrClass) = $namespacedFunction;
 
             if (\function_exists($functionOrClass)) {
                 $function = \explode("\\", $functionOrClass);
@@ -113,10 +87,6 @@ class FileEditor
 
                 if (!empty($functions[$function])) {
                     unset($functions[$function]);
-                }
-
-                if (\strlen($alias) > 0 && !empty($functions[$alias])) {
-                    unset($functions[$alias]);
                 }
             }
         }
@@ -150,6 +120,8 @@ class FileEditor
             return $previousCharacter.$v."(";
         };
         $functions = \array_map($callback, $functions);
+
+
 
         return $functions;
     }

@@ -55,9 +55,9 @@ class FileEditorTest extends \PHPUnit_Framework_TestCase
         $this->fileEditor->addBackslashes($this->base.'/Resources/BooleanAndNull.php');
         $output = $this->fileSystem->getFile($this->base.'/Resources/BooleanAndNull.php');
 
-        $this->assertContains('\true', $output);
-        $this->assertContains('\false', $output);
-        $this->assertContains('\null', $output);
+        $this->assertContains('$this->a = \true', $output);
+        $this->assertContains('$this->b = \false', $output);
+        $this->assertContains('$this->c = \null', $output);
 
     }
 
@@ -76,5 +76,26 @@ class FileEditorTest extends \PHPUnit_Framework_TestCase
         $output = $this->fileSystem->getFile($this->base.'/Resources/Function.php');
 
         $this->assertContains('return \strlen($string)', $output);
+    }
+
+
+    public function testItDoesNotBackSlashFunctionsFromImportedFunctions()
+    {
+        $this->fileEditor->addBackslashes($this->base.'/Resources/StringClass.php');
+        $output = $this->fileSystem->getFile($this->base.'/Resources/StringClass.php');
+
+        $this->assertContains('return strlen($value);', $output);
+        $this->assertContains('use function strlen;', $output);
+    }
+
+
+
+    public function testItDoesNotBackSlashAliasedFunctions()
+    {
+        $this->fileEditor->addBackslashes($this->base.'/Resources/AliasedFunction.php');
+        $output = $this->fileSystem->getFile($this->base.'/Resources/AliasedFunction.php');
+
+        $this->assertContains('return stringLength($value);', $output);
+        $this->assertContains('use function strlen as stringLength;', $output);
     }
 } 
