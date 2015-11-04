@@ -1,4 +1,4 @@
 /vendor
 /composer.lock
-/build_test
+/build
 .php_cs.cache

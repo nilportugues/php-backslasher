@@ -46,9 +46,9 @@ class FileEditor
 
     /**
      * @param $path
-     * @return float
+     * @return void
      */
-    public function addBackslashesToFunctions($path)
+    public function addBackslashes($path)
     {
         $generator = $this->fileGenerator->fromReflectedFileName($path);
         $source = $generator->getSourceContent();
@@ -76,7 +76,7 @@ class FileEditor
      *
      * @return array
      */
-    public function removeFunctionsExistingInCurrentNamespaceFromBackslashing(
+    private function removeFunctionsExistingInCurrentNamespaceFromBackslashing(
         FileGenerator $generator,
         array $functions
     ) {
@@ -102,7 +102,7 @@ class FileEditor
      *
      * @return array
      */
-    public function removeUseFunctionsFromBackslashing(FileGenerator $generator, array $functions)
+    private function removeUseFunctionsFromBackslashing(FileGenerator $generator, array $functions)
     {
         foreach ($generator->getUses() as $namespacedFunction) {
             list($functionOrClass, $alias) = $namespacedFunction;

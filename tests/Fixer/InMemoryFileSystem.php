@@ -4,7 +4,6 @@ namespace NilPortugues\Tests\BackslashFixer\Fixer;
 
 use NilPortugues\BackslashFixer\Fixer\Interfaces\FileSystem;
 
-
 class InMemoryFileSystem implements FileSystem
 {
     /**
@@ -21,14 +20,25 @@ class InMemoryFileSystem implements FileSystem
         "Resources/BooleanAndNull.php",
     ];
 
+    private $base;
+
     /**
      * InMemoryFileSystem constructor.
      */
     public function __construct()
     {
+        $reflector = new \ReflectionClass(get_class($this));
+        $this->base =  dirname($reflector->getFileName());
+
         foreach(self::$filePath as $file) {
-            self::$fileSystem[$file] = \file_get_contents($file);
+            $path = $this->base.DIRECTORY_SEPARATOR.$file;
+            self::$fileSystem[$path] = \file_get_contents($path);
         }
+    }
+
+    public function getFile($file)
+    {
+        return self::$fileSystem[$file];
     }
 
     /**
@@ -36,7 +46,13 @@ class InMemoryFileSystem implements FileSystem
      */
     public function getFilesFromPath($path)
     {
-       return array_keys(self::$fileSystem);
+        $files = [];
+        foreach(array_keys(self::$fileSystem) as $file) {
+            $path = $this->base.DIRECTORY_SEPARATOR.$file;
+            $files[$path] = $path;
+        }
+
+        return $files;
     }
 
     /**

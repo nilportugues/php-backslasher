@@ -54,7 +54,7 @@ class FixerCommand extends Command
         $fileEditor = new FileEditor(new FileGenerator(), new FunctionRepository(), $fileSystem);
 
         foreach ($fileSystem->getFilesFromPath($path) as $file) {
-            $fileEditor->addBackslashesToFunctions($file);
+            $fileEditor->addBackslashes($file);
         }
 
         $output->write('Success!', \true);

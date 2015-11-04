@@ -37,6 +37,8 @@
             <directory>./src</directory>
             <exclude>
                 <directory>./src/bootstrap.php</directory>
+                <directory>./src/BackslashFixer/Console</directory>
+                <directory>./src/BackslashFixer/Command</directory>
             </exclude>
         </whitelist>
     </filter>
