@@ -98,4 +98,13 @@ class FileEditorTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('return stringLength($value);', $output);
         $this->assertContains('use function strlen as stringLength;', $output);
     }
+
+
+    public function testItDoesNotBackSlashImportedConstant()
+    {
+        $this->fileEditor->addBackslashes($this->base.'/Resources/ConstantClass.php');
+        $output = $this->fileSystem->getFile($this->base.'/Resources/ConstantClass.php');
+
+        $this->assertContains('return DIRECTORY_SEPARATOR;', $output);
+    }
 } 
