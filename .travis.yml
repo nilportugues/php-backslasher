@@ -9,7 +9,7 @@ before_script:
   - composer install
 
 script: 
-  - bin/phpunit --coverage-text
+  - php vendor/phpunit/phpunit/phpunit tests/
 
 matrix:
      allow_failures:
