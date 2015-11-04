@@ -60,9 +60,7 @@ class FileEditor
         }
 
         $constants = $this->getDefinedConstants();
-        $constants = $this->removeUseConstantsFromBackslashing($generator, $constants);
         $source = \str_replace($constants, $this->replaceConstants($constants), $source);
-
         $source = \str_replace(['true', 'false', 'null'], ['\true', '\false', '\null'], $source);
         $source = \str_replace("function \\", "function ", $source);
         $source = \str_replace("const \\", "const ", $source);
@@ -99,33 +97,6 @@ class FileEditor
     }
 
 
-    /**
-     * If a constant exists under a namespace and has been aliased, or has been imported, don't replace.
-     *
-     * @param FileGenerator $generator
-     * @param array         $constants
-     *
-     * @return array
-     */
-    private function removeUseConstantsFromBackslashing(FileGenerator $generator, array $constants)
-    {
-        foreach ($generator->getUses() as $namespace) {
-
-            foreach($constants as $constant) {
-                list($namespace) = $namespace;
-                $namespacedConstant = $namespace.'\\'.$constant;
-
-                if (\defined($namespacedConstant)) {
-
-                    if (!empty($constants[$constant])) {
-                        unset($constants[$constant]);
-                    }
-                }
-            }
-        }
-
-        return $constants;
-    }
 
     /**
      * @param  string $previousCharacter
@@ -160,6 +131,8 @@ class FileEditor
     }
 
     /**
+     * @param array $constants
+     *
      * @return array
      */
     private function replaceConstants(array $constants)
@@ -169,7 +142,9 @@ class FileEditor
             return sprintf('\%s', $v);
         };
 
-        return \array_map($callback, $constants);
+        $a = \array_map($callback, $constants);
+
+        return $a;
     }
 
     /**

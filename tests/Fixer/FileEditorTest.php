@@ -100,11 +100,4 @@ class FileEditorTest extends \PHPUnit_Framework_TestCase
     }
 
 
-    public function testItDoesNotBackSlashImportedConstant()
-    {
-        $this->fileEditor->addBackslashes($this->base.'/Resources/ConstantClass.php');
-        $output = $this->fileSystem->getFile($this->base.'/Resources/ConstantClass.php');
-
-        $this->assertContains('return DIRECTORY_SEPARATOR;', $output);
-    }
 } 
