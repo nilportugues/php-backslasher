@@ -26,18 +26,21 @@ $ php bin/php_backslasher fix <path/to/directory>
 
 ###Output
 
-Works for functions in conditional statements, negative conditionals, placed in an array as key or value and any other normal use.
+Works for functions in conditional statements, negative conditionals, placed in an array as key or value and any other normal use. Also adds a backslash to defined constants and true, false and null values.
 
-Also adds a backslash to defined constants and true, false and null values.
-
+#### Internal functions and constants
 ```php
 echo strlen('Hello World');
-
+var_dump(null);
+var_dump(false);
+echo DIRECTORY_SEPARATOR;
 return true;
 
 // becomes:
 echo \strlen('Hello World');
-
+var_dump(\null);
+var_dump(\false);
+echo \DIRECTORY_SEPARATOR;
 return \true;
 ```
 
