@@ -7,7 +7,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace NilPortugues\Tests\BackslashFixer\Resources;
 
 use PHPUnit_Framework_TestCase;
@@ -21,7 +20,6 @@ function strlen($string)
 
     return $i + 1;
 }
-
 
 class StringToolsTest extends PHPUnit_Framework_TestCase
 {

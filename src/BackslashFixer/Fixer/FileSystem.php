@@ -1,22 +1,18 @@
 <?php
-/**
- * Author: Nil Portugués Calderó <contact@nilportugues.com>
- * Date: 11/1/15
- * Time: 12:15 AM
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
 namespace NilPortugues\BackslashFixer\Fixer;
+
 
 use InvalidArgumentException;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
-class PhpFilesRepository
+class FileSystem implements \NilPortugues\BackslashFixer\Fixer\Interfaces\FileSystem
 {
-    public function find($path)
+    /**
+     * @inheritDoc
+     */
+    public function getFilesFromPath($path)
     {
         if (\false === \is_dir($path) && \false === \is_file($path)) {
             throw new InvalidArgumentException("Provided input is not a file nor a valid directory");
@@ -39,5 +35,12 @@ class PhpFilesRepository
         }
 
         return $files;
+    }
+    /**
+     * @inheritDoc
+     */
+    public function writeFile($filePath, $fileContent)
+    {
+        \file_put_contents($filePath, $fileContent);
     }
 }

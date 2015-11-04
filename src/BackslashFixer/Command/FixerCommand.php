@@ -4,12 +4,13 @@ namespace NilPortugues\BackslashFixer\Command;
 
 use Exception;
 use NilPortugues\BackslashFixer\Fixer\FileEditor;
-use NilPortugues\BackslashFixer\Fixer\PhpFilesRepository;
+use NilPortugues\BackslashFixer\Fixer\FileSystem;
+use NilPortugues\BackslashFixer\Fixer\FunctionRepository;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-
+use Zend\Code\Generator\FileGenerator;
 
 class FixerCommand extends Command
 {
@@ -41,7 +42,7 @@ class FixerCommand extends Command
      * @param InputInterface  $input  Input
      * @param OutputInterface $output Output
      *
-     * @return int|\null|void
+     * @return \int|\null|void
      *
      * @throws Exception
      */
@@ -49,17 +50,14 @@ class FixerCommand extends Command
     {
         $path = $input->getArgument('path');
 
-        $fileEditor = new FileEditor();
+        $fileSystem = new FileSystem();
+        $fileEditor = new FileEditor(new FileGenerator(), new FunctionRepository(), $fileSystem);
 
-        $fileRepository = new PhpFilesRepository();
-        $files = $fileRepository->find($path);
-
-        foreach ($files as $file) {
+        foreach ($fileSystem->getFilesFromPath($path) as $file) {
             $fileEditor->addBackslashesToFunctions($file);
         }
 
         $output->write('Success!', \true);
-
         return $output;
     }
 }

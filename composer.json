@@ -27,11 +27,11 @@
   "require": {
     "php": ">=5.4",
     "symfony/console": "~2.2",
-    "zendframework/zend-code": "~2"
+    "zendframework/zend-code": "~2",
+    "phpunit/phpunit": "^5.0"
   },
   "require-dev": {
-    "fabpot/php-cs-fixer": "1.4.2",
-    "phpunit/phpunit": "4.5.0"
+    "fabpot/php-cs-fixer": "1.4.2"
   },
   "autoload": {
     "psr-4": {
@@ -45,8 +45,5 @@
   },
   "bin": [
     "bin/php_backslasher"
-  ],
-  "config": {
-    "bin-dir": "bin"
-  }
+  ]
 }

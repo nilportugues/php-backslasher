@@ -5,7 +5,6 @@ namespace NilPortugues\BackslashFixer\Console;
 
 use NilPortugues\BackslashFixer\Command\FixerCommand;
 
-
 class Application extends \Symfony\Component\Console\Application
 {
     /**
@@ -13,7 +12,7 @@ class Application extends \Symfony\Component\Console\Application
      */
     public function __construct()
     {
-        parent::__construct('PHP Function BackSlasher');
+        parent::__construct('PHP BackSlasher');
     }
 
     /**
