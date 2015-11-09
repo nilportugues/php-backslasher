@@ -5,6 +5,8 @@
   "keywords": [
     "php",
     "fixer",
+    "git",
+    "hook",
     "namespace",
     "namespaces",
     "backflash",
