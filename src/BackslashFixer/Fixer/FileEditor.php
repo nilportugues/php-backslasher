@@ -14,15 +14,21 @@ use Zend\Code\Generator\FileGenerator;
 
 class FileEditor
 {
-    const BACKSLASH_TOKEN = 388;
-    const FUNCTION_TOKEN = 310;
-
     /**
      * @var array
      */
     private static $constants = [];
+    /**
+     * @var \Zend\Code\Generator\FileGenerator
+     */
     private $fileGenerator;
+    /**
+     * @var FunctionRepository
+     */
     private $functions;
+    /**
+     * @var Interfaces\FileSystem
+     */
     private $fileSystem;
 
     /**
@@ -61,26 +67,33 @@ class FileEditor
                 $token = [0 => 0, 1 => $tempToken, 2 => 0];
             }
 
-            if ($token[0] == self::FUNCTION_TOKEN) {
+            if ($token[0] == T_STRING) {
                 $reservedToken = $token[1];
 
                 //isFunction
                 if (!empty($functions[$reservedToken])
-                    && $previousToken[0] != self::BACKSLASH_TOKEN
-                    && $previousToken[0] != T_LIST
+                    && $previousToken[0] != T_NAMESPACE
+                    && $previousToken[0] != T_OBJECT_OPERATOR
                 ) {
                     $line = $token[2];
                     $source[$line-1] = str_replace($reservedToken, '\\'.$reservedToken, $source[$line-1]);
                 }
 
                 //isConstant
-                if (!empty($constants[strtoupper($reservedToken)])
-                    && $previousToken[0] != self::BACKSLASH_TOKEN
+                if (!empty($constants[strtoupper($token[1])])
+                    && $previousToken[0] != T_NAMESPACE
+                    && !in_array(strtolower($token[1]), ['true', 'false', 'null'])
                 ) {
                     $line = $token[2];
-                    $source[$line-1] = str_replace($reservedToken, '\\'.$reservedToken, $source[$line-1]);
+                    $source[$line-1] = str_replace($token[1], '\\'.$token[1], $source[$line-1]);
                 }
             }
+
+            if (in_array(strtolower($token[1]), ['true', 'false', 'null'])) {
+                $line = $token[2];
+                $source[$line-1] = str_replace($token[1], '\\'.$token[1], $source[$line-1]);
+            }
+
             $previousToken = $token;
         }
 
@@ -129,7 +142,9 @@ class FileEditor
 
         $c = array_values(self::$constants);
 
-        return array_combine($c, $c);
+        self::$constants = array_combine($c, $c);
+
+        return self::$constants;
     }
 
     /**
