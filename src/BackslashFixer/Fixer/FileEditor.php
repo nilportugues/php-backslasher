@@ -68,20 +68,9 @@ class FileEditor
             }
 
             if ($token[0] == T_STRING) {
-                $reservedToken = $token[1];
+                $line = $token[2];
 
-                //isFunction
-                if (!empty($functions[$reservedToken])
-                    && $previousToken[0] != T_NAMESPACE
-                    && $previousToken[0] != T_OBJECT_OPERATOR
-                ) {
-                    $line = $token[2];
-                    $source[$line-1] = str_replace($reservedToken, '\\'.$reservedToken, $source[$line-1]);
-                }
-
-                //isConstant
-                if (!empty($constants[strtoupper($token[1])]) && $previousToken[0] != T_NAMESPACE) {
-                    $line = $token[2];
+                if ($this->isBackslashable($functions, $token, $previousToken, $constants)) {
                     $source[$line-1] = str_replace($token[1], '\\'.$token[1], $source[$line-1]);
                 }
             }
@@ -89,10 +78,7 @@ class FileEditor
             $previousToken = $token;
         }
 
-        $source = implode("\n", $source);
-        $source = \str_replace("function \\", "function ", $source);
-        $source = \str_replace("const \\", "const ", $source);
-        $source = \str_replace("::\\", "::", $source);
+        $source = $this->applyFinalFixes($source);
 
         $this->fileSystem->writeFile($path, $source);
     }
@@ -130,11 +116,10 @@ class FileEditor
     {
         if (empty(self::$constants)) {
             self::$constants = \array_keys(\get_defined_constants(\false));
+            $c = array_values(self::$constants);
+            self::$constants = array_combine($c, $c);
         }
 
-        $c = array_values(self::$constants);
-
-        self::$constants = array_combine($c, $c);
 
         return self::$constants;
     }
@@ -149,5 +134,60 @@ class FileEditor
         $functions = $this->removeUseFunctionsFromBackslashing($generator, $functions);
 
         return $functions;
+    }
+
+    /**
+     * @param string $source
+     *
+     * @return string
+     */
+    private function applyFinalFixes($source)
+    {
+        $source = implode("\n", $source);
+        $source = \str_replace("function \\", "function ", $source);
+        $source = \str_replace("const \\", "const ", $source);
+        $source = \str_replace("::\\", "::", $source);
+
+        return (string) $source;
+    }
+
+    /**
+     * @param $constants
+     * @param $token
+     * @param $previousToken
+     *
+     * @return bool
+     */
+    private function isConstant(array &$constants, array &$token, array &$previousToken)
+    {
+        return !empty($constants[strtoupper($token[1])]) && $previousToken[0] != T_NAMESPACE;
+    }
+
+    /**
+     * @param array $functions
+     * @param array $token
+     * @param array $previousToken
+     *
+     * @return bool
+     */
+    private function isFunction(array &$functions, array &$token, array &$previousToken)
+    {
+        return !empty($functions[$token[1]])
+        && $previousToken[0] != T_NAMESPACE
+        && $previousToken[0] != T_OBJECT_OPERATOR;
+    }
+
+    /**
+     * @param array $functions
+     * @param array $token
+     * @param array $previousToken
+     * @param array $constants
+     *
+     * @return bool
+     */
+    private function isBackslashable(array &$functions, array &$token, array &$previousToken, array &$constants)
+    {
+        return $this->isFunction($functions, $token, $previousToken)
+        || ($this->isConstant($constants, $token, $previousToken));
     }
 }
