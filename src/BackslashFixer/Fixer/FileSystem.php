@@ -2,7 +2,6 @@
 
 namespace NilPortugues\BackslashFixer\Fixer;
 
-
 use InvalidArgumentException;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;

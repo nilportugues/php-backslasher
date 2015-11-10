@@ -9,35 +9,32 @@
  */
 namespace NilPortugues\BackslashFixer\Fixer;
 
-use NilPortugues\BackslashFixer\Fixer\Interfaces\FileSystem;
+use NilPortugues\BackslashFixer\Fixer\Interfaces\FileSystem as FileSystemInterface;
 use Zend\Code\Generator\FileGenerator;
 
 class FileEditor
 {
-    /**
-     * @var array
-     */
-    private static $characters = [" ", "(", ",", "!", "[", "="];
+    const BACKSLASH_TOKEN = 388;
+    const FUNCTION_TOKEN = 310;
 
     /**
      * @var array
      */
     private static $constants = [];
-
     private $fileGenerator;
     private $functions;
     private $fileSystem;
 
     /**
      * FileEditor constructor.
-     * @param FileGenerator $fileGenerator
-     * @param FunctionRepository $functionRepository
-     * @param FileSystem $fileSystem
+     * @param FileGenerator       $fileGenerator
+     * @param FunctionRepository  $functionRepository
+     * @param FileSystemInterface $fileSystem
      */
     public function __construct(
         FileGenerator $fileGenerator,
         FunctionRepository $functionRepository,
-        FileSystem $fileSystem
+        FileSystemInterface $fileSystem
     ) {
         $this->fileGenerator = $fileGenerator;
         $this->functions = $functionRepository;
@@ -51,24 +48,49 @@ class FileEditor
     public function addBackslashes($path)
     {
         $generator = $this->fileGenerator->fromReflectedFileName($path);
-        $source = $generator->getSourceContent();
+        $source = explode("\n", $generator->getSourceContent());
+        $tokens = token_get_all(file_get_contents($path));
 
-        foreach (self::$characters as $character) {
-            $functions = $this->buildFunctions($character);
-            $functions = $this->removeUseFunctionsFromBackslashing($generator, $functions);
-            $source = \str_replace($functions, $this->buildBackslashedFunctions($character), $source);
+        $previousToken = null;
+        $functions = $this->getReplaceableFunctions($generator);
+        $constants = $this->getDefinedConstants();
+
+        foreach ($tokens as $token) {
+            if (!is_array($token)) {
+                $tempToken = $token;
+                $token = [0 => 0, 1 => $tempToken, 2 => 0];
+            }
+
+            if ($token[0] == self::FUNCTION_TOKEN) {
+                $reservedToken = $token[1];
+
+                //isFunction
+                if (!empty($functions[$reservedToken])
+                    && $previousToken[0] != self::BACKSLASH_TOKEN
+                    && $previousToken[0] != T_LIST
+                ) {
+                    $line = $token[2];
+                    $source[$line-1] = str_replace($reservedToken, '\\'.$reservedToken, $source[$line-1]);
+                }
+
+                //isConstant
+                if (!empty($constants[strtoupper($reservedToken)])
+                    && $previousToken[0] != self::BACKSLASH_TOKEN
+                ) {
+                    $line = $token[2];
+                    $source[$line-1] = str_replace($reservedToken, '\\'.$reservedToken, $source[$line-1]);
+                }
+            }
+            $previousToken = $token;
         }
 
-        $constants = $this->getDefinedConstants();
-        $source = \str_replace($constants, $this->replaceConstants($constants), $source);
-        $source = \str_replace(['true', 'false', 'null'], ['\true', '\false', '\null'], $source);
+        $source = implode("\n", $source);
         $source = \str_replace("function \\", "function ", $source);
         $source = \str_replace("const \\", "const ", $source);
         $source = \str_replace("::\\", "::", $source);
 
         $this->fileSystem->writeFile($path, $source);
     }
-
 
     /**
      * If a method exists under a namespace and has been aliased, or has been imported, don't replace.
@@ -96,57 +118,6 @@ class FileEditor
         return $functions;
     }
 
-
-
-    /**
-     * @param  string $previousCharacter
-     * @return array
-     */
-    private function buildBackslashedFunctions($previousCharacter = ' ')
-    {
-        $backSlashedFunctions = $this->functions->getFunctions();
-
-        $callback             = function ($v) use ($previousCharacter) {
-            return $previousCharacter.'\\'.\ltrim($v, "\\")."(";
-        };
-
-        return \array_map($callback, $backSlashedFunctions);
-    }
-
-    /**
-     * @param  string $previousCharacter
-     * @return array
-     */
-    private function buildFunctions($previousCharacter = ' ')
-    {
-        $functions = $this->functions->getFunctions();
-        $callback  = function ($v) use ($previousCharacter) {
-            return $previousCharacter.$v."(";
-        };
-        $functions = \array_map($callback, $functions);
-
-
-
-        return $functions;
-    }
-
-    /**
-     * @param array $constants
-     *
-     * @return array
-     */
-    private function replaceConstants(array $constants)
-    {
-
-        $callback  = function ($v) {
-            return sprintf('\%s', $v);
-        };
-
-        $a = \array_map($callback, $constants);
-
-        return $a;
-    }
-
     /**
      * @return array
      */
@@ -157,6 +128,19 @@ class FileEditor
         }
 
         $c = array_values(self::$constants);
+
         return array_combine($c, $c);
+    }
+
+    /**
+     * @param $generator
+     * @return array
+     */
+    protected function getReplaceableFunctions($generator)
+    {
+        $functions = $this->functions->getFunctions();
+        $functions = $this->removeUseFunctionsFromBackslashing($generator, $functions);
+
+        return $functions;
     }
 }
