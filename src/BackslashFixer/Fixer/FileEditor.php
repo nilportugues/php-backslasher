@@ -80,18 +80,10 @@ class FileEditor
                 }
 
                 //isConstant
-                if (!empty($constants[strtoupper($token[1])])
-                    && $previousToken[0] != T_NAMESPACE
-                    && !in_array(strtolower($token[1]), ['true', 'false', 'null'])
-                ) {
+                if (!empty($constants[strtoupper($token[1])]) && $previousToken[0] != T_NAMESPACE) {
                     $line = $token[2];
                     $source[$line-1] = str_replace($token[1], '\\'.$token[1], $source[$line-1]);
                 }
-            }
-
-            if (in_array(strtolower($token[1]), ['true', 'false', 'null'])) {
-                $line = $token[2];
-                $source[$line-1] = str_replace($token[1], '\\'.$token[1], $source[$line-1]);
             }
 
             $previousToken = $token;
