@@ -38,8 +38,8 @@ return true;
 
 // becomes:
 echo \strlen('Hello World');
-var_dump(\null);
-var_dump(\false);
+\var_dump(\null);
+\var_dump(\false);
 echo \DIRECTORY_SEPARATOR;
 return \true;
 ```
