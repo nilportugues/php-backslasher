@@ -15,7 +15,7 @@ Function resolution without the backslash forces the PHP internals to verify for
 Use [Composer](https://getcomposer.org) to install the package:
 
 ```
-$ composer require nilportugues/php_backslasher
+$ composer require --dev nilportugues/php_backslasher
 ```
 
 ## Usage
