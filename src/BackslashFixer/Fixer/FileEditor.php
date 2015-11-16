@@ -120,7 +120,6 @@ class FileEditor
             self::$constants = array_combine($c, $c);
         }
 
-
         return self::$constants;
     }
 
@@ -130,7 +129,7 @@ class FileEditor
      */
     protected function getReplaceableFunctions($generator)
     {
-        $functions = $this->functions->getFunctions();
+        $functions = $this->functions->getBackslashableFunctions();
         $functions = $this->removeUseFunctionsFromBackslashing($generator, $functions);
 
         return $functions;
