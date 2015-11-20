@@ -124,7 +124,7 @@ class FileEditor
     private function getDefinedConstants()
     {
         if (empty(self::$constants)) {
-            self::$constants = \array_keys(\get_defined_constants(\\false));
+            self::$constants = \array_keys(\get_defined_constants(false));
             $c = array_values(self::$constants);
             self::$constants = array_combine($c, $c);
         }
@@ -152,9 +152,9 @@ class FileEditor
     private function applyFinalFixes($source)
     {
         $source = implode("\n", $source);
-        $source = \str_replace("function \", "function ", $source);
-        $source = \str_replace("const \", "const ", $source);
-        $source = \str_replace("::\", "::", $source);
+        $source = str_replace("function \\", "function ", $source);
+        $source = str_replace("const \\", "const ", $source);
+        $source = str_replace("::\\", "::", $source);
 
         return (string) $source;
     }

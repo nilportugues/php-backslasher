@@ -57,7 +57,7 @@ class FixerCommand extends Command
             $fileEditor->addBackslashes($file);
         }
 
-        $output->write('Success! Backslashes added!', \\true);
+        $output->write('Success! Backslashes added!', true);
 
         return $output;
     }

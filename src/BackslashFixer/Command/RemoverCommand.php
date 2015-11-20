@@ -57,7 +57,7 @@ class RemoverCommand extends Command
             $fileEditor->removeBackslashes($file);
         }
 
-        $output->write('Success! Backslashes removed!', \\true);
+        $output->write('Success! Backslashes removed!', true);
 
         return $output;
     }
