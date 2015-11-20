@@ -9,3 +9,12 @@ namespace NilPortugues\Tests\BackslashFixer\Fixer\Resources;
 function countStringLength($string) {
     return strlen($string);
 }
+
+/**
+ * @param $haystack
+ * @param $value
+ * @return bool|int
+ */
+function strpos($haystack, $value) {
+    return strpos($haystack, $value)+1;
+}

@@ -4,6 +4,7 @@
 namespace NilPortugues\BackslashFixer\Console;
 
 use NilPortugues\BackslashFixer\Command\FixerCommand;
+use NilPortugues\BackslashFixer\Command\RemoverCommand;
 
 class Application extends \Symfony\Component\Console\Application
 {
@@ -24,6 +25,7 @@ class Application extends \Symfony\Component\Console\Application
     {
         $commands = parent::getDefaultCommands();
         $commands[] = new FixerCommand();
+        $commands[] = new RemoverCommand();
 
         return $commands;
     }

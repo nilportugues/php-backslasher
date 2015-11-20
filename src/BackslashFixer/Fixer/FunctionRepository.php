@@ -15,9 +15,14 @@ namespace NilPortugues\BackslashFixer\Fixer;
  */
 class FunctionRepository
 {
+    /**
+     * @var array
+     */
     private static $backslashable = [];
+    /**
+     * @var array
+     */
     private static $functions = [];
-
     /**
      *
      */
@@ -25,18 +30,19 @@ class FunctionRepository
     {
         self::$functions = \array_map('strtolower', \get_defined_functions()['internal']);
         self::$functions = \array_combine(\array_values(self::$functions), self::$functions);
-        ksort(self::$functions, SORT_REGULAR);
+        ksort(self::$functions, \SORT_REGULAR);
     }
 
     /**
+     * Search backwards starting from haystack length characters from the end
+     *
      * @param $haystack
      * @param $needle
      * @return bool
      */
     private static function startsWith($haystack, $needle)
     {
-        // search backwards starting from haystack length characters from the end
-        return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== false;
+        return $needle === "" || strrpos($haystack, $needle, -\strlen($haystack)) !== \false;
     }
 
     /**
@@ -50,7 +56,7 @@ class FunctionRepository
         self::$backslashable = [];
 
         foreach (self::$functions as $name => $value) {
-            if (true === self::startsWith('is_', $value)) {
+            if (\true === self::startsWith('is_', $value)) {
                 $backslashable[$name] = $value;
             }
         }

@@ -76,6 +76,7 @@ class FileEditorTest extends \PHPUnit_Framework_TestCase
         $output = $this->fileSystem->getFile($this->base.'/Resources/Function.php');
 
         $this->assertContains('return \strlen($string)', $output);
+        $this->assertContains('return strpos($haystack, $value)+1', $output);
     }
 
 

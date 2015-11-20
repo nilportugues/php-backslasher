@@ -12,14 +12,14 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Zend\Code\Generator\FileGenerator;
 
-class FixerCommand extends Command
+class RemoverCommand extends Command
 {
     /**
      * @var string
      *
      * Command name
      */
-    const COMMAND_NAME = 'fix';
+    const COMMAND_NAME = 'undo';
 
     /**
      * configure
@@ -27,8 +27,8 @@ class FixerCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('fix')
-            ->setDescription('Adds backslashes to all internal PHP functions')
+            ->setName('undo')
+            ->setDescription('Removes backslashes to all internal PHP functions')
             ->addArgument(
                 'path',
                 InputArgument::REQUIRED,
@@ -54,10 +54,10 @@ class FixerCommand extends Command
         $fileEditor = new FileEditor(new FileGenerator(), new FunctionRepository(), $fileSystem);
 
         foreach ($fileSystem->getFilesFromPath($path) as $file) {
-            $fileEditor->addBackslashes($file);
+            $fileEditor->removeBackslashes($file);
         }
 
-        $output->write('Success! Backslashes added!', \\true);
+        $output->write('Success! Backslashes removed!', \\true);
 
         return $output;
     }

@@ -57,7 +57,7 @@ class FileEditor
         $source = explode("\n", $generator->getSourceContent());
         $tokens = token_get_all(file_get_contents($path));
 
-        $previousToken = null;
+        $previousToken = \null;
         $functions = $this->getReplaceableFunctions($generator);
         $constants = $this->getDefinedConstants();
 
@@ -67,7 +67,7 @@ class FileEditor
                 $token = [0 => 0, 1 => $tempToken, 2 => 0];
             }
 
-            if ($token[0] == T_STRING) {
+            if ($token[0] == \T_STRING) {
                 $line = $token[2];
 
                 if ($this->isBackslashable($functions, $token, $previousToken, $constants)) {
@@ -81,6 +81,15 @@ class FileEditor
         $source = $this->applyFinalFixes($source);
 
         $this->fileSystem->writeFile($path, $source);
+    }
+
+
+    public function removeBackslashes($path)
+    {
+        $generator = $this->fileGenerator->fromReflectedFileName($path);
+        $source = explode("\n", $generator->getSourceContent());
+        $tokens = token_get_all(file_get_contents($path));
+
     }
 
     /**
@@ -115,7 +124,7 @@ class FileEditor
     private function getDefinedConstants()
     {
         if (empty(self::$constants)) {
-            self::$constants = \array_keys(\get_defined_constants(\false));
+            self::$constants = \array_keys(\get_defined_constants(\\false));
             $c = array_values(self::$constants);
             self::$constants = array_combine($c, $c);
         }
@@ -143,9 +152,9 @@ class FileEditor
     private function applyFinalFixes($source)
     {
         $source = implode("\n", $source);
-        $source = \str_replace("function \\", "function ", $source);
-        $source = \str_replace("const \\", "const ", $source);
-        $source = \str_replace("::\\", "::", $source);
+        $source = \str_replace("function \", "function ", $source);
+        $source = \str_replace("const \", "const ", $source);
+        $source = \str_replace("::\", "::", $source);
 
         return (string) $source;
     }
@@ -159,7 +168,7 @@ class FileEditor
      */
     private function isConstant(array &$constants, array &$token, array &$previousToken)
     {
-        return !empty($constants[strtoupper($token[1])]) && $previousToken[0] != T_NAMESPACE;
+        return !empty($constants[strtoupper($token[1])]) && $previousToken[0] != \T_NAMESPACE;
     }
 
     /**
@@ -172,8 +181,8 @@ class FileEditor
     private function isFunction(array &$functions, array &$token, array &$previousToken)
     {
         return !empty($functions[$token[1]])
-        && $previousToken[0] != T_NAMESPACE
-        && $previousToken[0] != T_OBJECT_OPERATOR;
+        && $previousToken[0] != \T_NAMESPACE
+        && $previousToken[0] != \T_OBJECT_OPERATOR;
     }
 
     /**
