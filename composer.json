@@ -28,7 +28,7 @@
   ],
   "require": {
     "php": ">=5.4",
-    "symfony/console": "~2.2",
+    "symfony/console": "*",
     "zendframework/zend-code": "~2"
   },
   "require-dev": {
