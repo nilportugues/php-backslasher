@@ -28,11 +28,11 @@
   ],
   "require": {
     "php": ">=5.4",
-    "symfony/console": "*",
+    "symfony/console": "^3",
     "zendframework/zend-code": "~2"
   },
   "require-dev": {
-    "fabpot/php-cs-fixer": "1.4.2",
+    "friendsofphp/php-cs-fixer": "^2",
     "phpunit/phpunit": "^5.0"
   },
   "autoload": {
