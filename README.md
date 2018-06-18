@@ -25,7 +25,7 @@ $ composer require --dev nilportugues/php_backslasher
 $ php bin/php_backslasher fix <path/to/directory>
 ```
 
-###Output
+### Output
 
 Works for functions in conditional statements, negative conditionals, placed in an array as key or value and any other normal use. Also adds a backslash to defined constants and true, false and null values.
 
