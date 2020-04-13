@@ -29,7 +29,7 @@
   "require": {
     "php": ">=5.4",
     "symfony/console": "^2|^3|^4",
-    "zendframework/zend-code": "~2"
+    "zendframework/zend-code": "~3"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2",
